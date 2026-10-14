@@ -21177,7 +21177,7 @@ if not getgenv().AlreadyLoad then
 
 			table.sort(fruitSet)
 			getgenv().SelectedFruitToStore = normalizeSelectedItems(getgenv().SelectedFruitToStore or {})
-			local tensenUILib = getgenv().__TensenLS(game:HttpGet("https://raw.githubusercontent.com/LeviOnTopLOL/Halloween/refs/heads/main/oxideui.lua"))()
+			local tensenUILib = getgenv().__TensenLS(HttpGet("https://raw.githubusercontent.com/LeviOnTopLOL/Halloween/refs/heads/main/oxideui.lua"))()
 			getgenv().TensenUILib = tensenUILib
 			tensenUILib:SetTheme("Light")
 			getgenv().__TensenGuiBefore = {}
