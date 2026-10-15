@@ -34014,7 +34014,7 @@ Private server travel needs teleport queue support]]
 							lastProgress = now
 						elseif 1.5 < now - lastProgress then
 							lastProgress = now
-							stuckUntil = now + 0.6
+							stuckUntil = now + 1.2
 						end
 
 						-- goal and steering point
