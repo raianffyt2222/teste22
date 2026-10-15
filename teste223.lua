@@ -22235,13 +22235,11 @@ if not getgenv().AlreadyLoad then
 			table.sort(fruitSet)
 			getgenv().SelectedFruitToStore = normalizeSelectedItems(getgenv().SelectedFruitToStore or {})
 			local oxideURL = "https://raw.githubusercontent.com/LeviOnTopLOL/Halloween/main/oxideui.lua"
-local code2 = nil
-pcall(function() code2 = game:HttpGet(oxideURL) end)
-if not code2 or #code2 < 1000 then
-    local req = request or http_request
-    code2 = req({Url = oxideURL, Method = "GET"}).Body
-end
-print("oxide tamanho:", code2 and #code2)
+local req = request or http_request or (syn and syn.request)
+local res = req({Url = oxideURL, Method = "GET"})
+print("status:", res.StatusCode, "tamanho:", res.Body and #res.Body)
+local code2 = res.Body
+print(code2:sub(1,120))
 local tensenUILib = getgenv().__TensenLS(code2)()
 			getgenv().TensenUILib = tensenUILib
 			tensenUILib:SetTheme("Light")
