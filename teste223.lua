@@ -32608,13 +32608,13 @@ Private server travel needs teleport queue support]]
 								end
 
 								if npcs:FindFirstChild("Fishman Karate User") then
-									call("TweenToMob", {
-										MobName = "Fishman Karate User",
-										Speed = getgenv().TweenSpeedMaster or 70,
-										Offset = Vector3.new(0, 9, 0),
-										Container = npcs
-									})
-
+    call("TweenToMob", {
+        MobName = "Fishman Karate User",
+        Speed = getgenv().TweenSpeedMaster or 70,
+        Offset = Vector3.new(0, 6, 0),
+        Container = npcs,
+        Raycast = false
+    })
 									continue
 								end
 
@@ -32679,11 +32679,12 @@ Private server travel needs teleport queue support]]
 
 						if npcs:FindFirstChild("Crazy Wolf") then
 							call("TweenToMob", {
-								MobName = "Crazy Wolf",
-								Speed = getgenv().TweenSpeedMaster or 70,
-								Offset = Vector3.new(0, 9, 0),
-								Container = npcs
-							})
+    MobName = "Crazy Wolf",
+    Speed = getgenv().TweenSpeedMaster or 70,
+    Offset = Vector3.new(0, 6, 0),
+    Container = npcs,
+    Raycast = false
+})
 
 							continue
 						end
@@ -37077,12 +37078,13 @@ Private server travel needs teleport queue support]]
 						end
 
 						local speed = getgenv().TweenSpeedMaster
-						getgenv().TweenToMob2({
-							MobName = "Yeti",
-							Speed = speed or 70,
-							Offset = Vector3.new(0, 10, 2),
-							Container = npCs,
-						})
+getgenv().TweenToMob2({
+    MobName = "Yeti",
+    Speed = speed or 70,
+    Offset = Vector3.new(0, 6, 2),
+    Container = npCs,
+    Raycast = false
+})
 
 						repeat
 							task.wait()
