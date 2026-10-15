@@ -34014,7 +34014,7 @@ Private server travel needs teleport queue support]]
 							lastProgress = now
 						elseif 1.5 < now - lastProgress then
 							lastProgress = now
-							stuckUntil = now + 1.2
+							stuckUntil = now + 0.6
 						end
 
 						-- goal and steering point
@@ -37078,13 +37078,12 @@ Private server travel needs teleport queue support]]
 						end
 
 						local speed = getgenv().TweenSpeedMaster
-getgenv().TweenToMob2({
-    MobName = "Yeti",
-    Speed = speed or 70,
-    Offset = Vector3.new(0, 6, 2),
-    Container = npCs,
-    Raycast = false
-})
+						getgenv().TweenToMob2({
+							MobName = "Yeti",
+							Speed = speed or 70,
+							Offset = Vector3.new(0, 10, 2),
+							Container = npCs,
+						})
 
 						repeat
 							task.wait()
@@ -37923,33 +37922,14 @@ getgenv().TweenToMob2({
 						getgenv().FishingTravelReady("the trip to the merchant")
 					end
 					ownsTween = true
-getgenv().TweenInstantY = false
-getgenv().WaterPlaneHold = true
-getgenv().WaterPlaneOffset = 5
-tweenTo({
-    CFrame = cframe,
-    Speed = 28,
-    StopDistance = 8,
-    TeleportOnClose = true,
-    TeleportDistance = 10,
-    WalkOnWater = true,
-    Noclip = true,
-    MaxTime = maxTime > 0 and maxTime or nil,
-})
-task.spawn(function()
-    repeat
-        task.wait()
-    until tweenState().Enabled == false
-    getgenv().TweenInstantY = true
-    getgenv().WaterPlaneHold = "auto"
-    if getgenv().releaseAimStance then
-        getgenv().releaseAimStance()
-    end
-    if getgenv().facingMouseNow and (getgenv().facingMouseNow() == true or getgenv().FaceMouseState == true) and getgenv().ToggleFaceMouse then
-        getgenv().ToggleFaceMouse(false, true)
-    end
-    getgenv().AlreadyTweenFishing = false
-end)
+					tweenTo({
+						CFrame = cframe,
+						Speed = getgenv().TweenSpeedMerchant or 110,
+						StopDistance = 5,
+						TeleportOnClose = true,
+						TeleportDistance = 5,
+						MaxTime = maxTime > 0 and maxTime or nil,
+					})
 					task.spawn(function()
 						repeat
 							task.wait()
