@@ -34014,7 +34014,7 @@ Private server travel needs teleport queue support]]
 							lastProgress = now
 						elseif 1.5 < now - lastProgress then
 							lastProgress = now
-							stuckUntil = now + 0.6
+							stuckUntil = now + 1.2
 						end
 
 						-- goal and steering point
@@ -37922,14 +37922,33 @@ Private server travel needs teleport queue support]]
 						getgenv().FishingTravelReady("the trip to the merchant")
 					end
 					ownsTween = true
-					tweenTo({
-						CFrame = cframe,
-						Speed = getgenv().TweenSpeedMerchant or 110,
-						StopDistance = 5,
-						TeleportOnClose = true,
-						TeleportDistance = 5,
-						MaxTime = maxTime > 0 and maxTime or nil,
-					})
+getgenv().TweenInstantY = false
+getgenv().WaterPlaneHold = true
+getgenv().WaterPlaneOffset = 5
+tweenTo({
+    CFrame = cframe,
+    Speed = 28,
+    StopDistance = 8,
+    TeleportOnClose = true,
+    TeleportDistance = 10,
+    WalkOnWater = true,
+    Noclip = true,
+    MaxTime = maxTime > 0 and maxTime or nil,
+})
+task.spawn(function()
+    repeat
+        task.wait()
+    until tweenState().Enabled == false
+    getgenv().TweenInstantY = true
+    getgenv().WaterPlaneHold = "auto"
+    if getgenv().releaseAimStance then
+        getgenv().releaseAimStance()
+    end
+    if getgenv().facingMouseNow and (getgenv().facingMouseNow() == true or getgenv().FaceMouseState == true) and getgenv().ToggleFaceMouse then
+        getgenv().ToggleFaceMouse(false, true)
+    end
+    getgenv().AlreadyTweenFishing = false
+end)
 					task.spawn(function()
 						repeat
 							task.wait()
