@@ -37922,16 +37922,29 @@ getgenv().TweenToMob2({
 					if getgenv().FishingTravelReady then
 						getgenv().FishingTravelReady("the trip to the merchant")
 					end
-					ownsTween = true
-					tweenTo({
-						CFrame = cframe,
-						Speed = getgenv().TweenSpeedMerchant or 110,
-						StopDistance = 5,
-						TeleportOnClose = true,
-						TeleportDistance = 5,
-						MaxTime = maxTime > 0 and maxTime or nil,
-					})
-					task.spawn(function()
+				ownsTween = true
+getgenv().TweenInstantYGap = 80
+tweenTo({
+    CFrame = cframe,
+    Speed = 35,
+    StopDistance = 8,
+    TeleportOnClose = true,
+    TeleportDistance = 10,
+    WalkOnWater = true,
+    MaxTime = maxTime > 0 and maxTime or nil,
+})
+task.spawn(function()
+    repeat
+        task.wait()
+    until tweenState().Enabled == false
+    if getgenv().releaseAimStance then
+        getgenv().releaseAimStance()
+    end
+    if getgenv().facingMouseNow and (getgenv().facingMouseNow() == true or getgenv().FaceMouseState == true) and getgenv().ToggleFaceMouse then
+        getgenv().ToggleFaceMouse(false, true)
+    end
+    getgenv().AlreadyTweenFishing = false
+end)
 						repeat
 							task.wait()
 						until tweenState().Enabled == false
